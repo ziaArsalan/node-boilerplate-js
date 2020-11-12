@@ -1,10 +1,12 @@
 const crypto = require('crypto')
+const jwt = require('jsonwebtoken')
 
 const Shields = {
     SALT        : 'e8d3a06b282c67d03a959cf88179c66f',
     ALGORITHM   : 'aes-256-cbc',
     IV_LENGTH   : 16,
-    KEY         : 'f23dbbe74fa7853879d1cd480a2ddec2'
+    KEY         : 'f23dbbe74fa7853879d1cd480a2ddec2',
+    PRIVATE_KEY : '118188eadccb71345738a3b3ad19161e43468959f0635ac0ca3e3c0b1c3c55b8'
 }
 
 const generatePassHash = (password) => {
@@ -29,10 +31,21 @@ const decrypt = (text) => {
     const decrypted = Buffer.concat([decipher.update(encryptedText), decipher.final()]);
    
     return decrypted.toString();
+
+}
+
+const generateToken = (payload, expires_in) => {
+    return jwt.sign(payload, Shields.PRIVATE_KEY, {expiresIn: expires_in})
+}
+
+const decodeToken = (token) => {
+    return jwt.verify(token, Shields.PRIVATE_KEY)
 }
 
 module.exports = {
     generatePassHash,
     encrypt,
-    decrypt
+    decrypt,
+    generateToken,
+    decodeToken
 }
