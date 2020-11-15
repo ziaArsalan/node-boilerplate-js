@@ -18,9 +18,20 @@ const ResponseStatus = {
     INTERNAL_ERROR  : 500,
 }
 
+const ResponseMessages = {
+    VALIDATION_ERROR    : 'Invalid or missing field'
+}
+
+const UserTypes = {
+    MASTER_ADMIN    : 1,
+    ADMIN           : 2
+}
+
 
 module.exports = {
     ENV,
     ReqMethods,
-    ResponseStatus
+    ResponseStatus,
+    ResponseMessages,
+    UserTypes
 }

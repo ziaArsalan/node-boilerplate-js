@@ -2,7 +2,8 @@ const { ENV, ResponseStatus } = require("../enums/enums")
 
 const env = {
     port        : 8080,
-    corsOption  : ''
+    corsOption  : '',
+    mongodb_uri : ''
 }
 
 if(process.env.NODE_ENV === ENV.DEVELOPMENT){
@@ -13,6 +14,7 @@ if(process.env.NODE_ENV === ENV.DEVELOPMENT){
     }
 
     env.corsOption = corsOption
+    env.mongodb_uri = 'mongodb+srv://EnterPassAdmin:CjD7zGSdd0gNJUcK@enterpasscluster.j5qty.mongodb.net/enterpass'
     
 }
 

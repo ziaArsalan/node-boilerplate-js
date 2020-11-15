@@ -3,7 +3,7 @@ const router = express.Router()
 
 const { ReqMethods } = require('../../enums/enums')
 
-const { SignUpCtrl } = require('./controller')
+const { SignUpCtrl, LoginCtrl } = require('./controllers')
 
 
 
@@ -13,6 +13,11 @@ const Route = () => {
             method  : ReqMethods.POST,
             url     : '/signup',
             fn      : SignUpCtrl
+        },
+        {
+            method  : ReqMethods.POST,
+            url     : '/login',
+            fn      : LoginCtrl
         }
     ]
 

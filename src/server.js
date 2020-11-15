@@ -3,9 +3,13 @@ const compression = require('compression')
 const cors = require('cors')
 
 const env = require('./config/config')
+const connectDb = require('./database/db')
 const endpoints = require('./app')
 
 const app = express()
+
+// Connect to Database
+connectDb()
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false, limit: '50mb'}))

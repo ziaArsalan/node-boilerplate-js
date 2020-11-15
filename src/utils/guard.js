@@ -13,6 +13,10 @@ const generatePassHash = (password) => {
     return crypto.pbkdf2Sync(password, Shields.SALT, 1000, 64, 'sha512').toString('hex')
 }
 
+const genrateKey = () => {
+    return crypto.randomBytes(4).toString('hex') + '-' + crypto.randomBytes(4).toString('hex') + '-' + crypto.randomBytes(4).toString('hex')
+}
+
 const encrypt = (text) => {
     const iv = crypto.randomBytes(Shields.IV_LENGTH);
     const cipher = crypto.createCipheriv(Shields.ALGORITHM, Buffer.from(Shields.KEY), iv);
@@ -26,7 +30,7 @@ const decrypt = (text) => {
     const textParts = text.split(':');
     const iv = Buffer.from(textParts.shift(), 'hex');
     const encryptedText = Buffer.from(textParts.join(':'), 'hex');
-    let decipher = crypto.createDecipheriv(Shields.ALGORITHM, Buffer.from(Shields.KEY), iv);
+    const decipher = crypto.createDecipheriv(Shields.ALGORITHM, Buffer.from(Shields.KEY), iv);
    
     const decrypted = Buffer.concat([decipher.update(encryptedText), decipher.final()]);
    
@@ -42,10 +46,16 @@ const decodeToken = (token) => {
     return jwt.verify(token, Shields.PRIVATE_KEY)
 }
 
+const verifyPass = (pass, passHash) => {
+    return generatePassHash(pass) == passHash
+}
+
 module.exports = {
     generatePassHash,
+    genrateKey,
     encrypt,
     decrypt,
     generateToken,
-    decodeToken
+    decodeToken,
+    verifyPass
 }
