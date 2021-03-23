@@ -1,3 +1,1 @@
-require('./src/server')
-
-require('./src/utils/guard')
+require('./server')

@@ -14,7 +14,7 @@ if(process.env.NODE_ENV === ENV.DEVELOPMENT){
     }
 
     env.corsOption = corsOption
-    env.mongodb_uri = 'mongodb+srv://EnterPassAdmin:CjD7zGSdd0gNJUcK@enterpasscluster.j5qty.mongodb.net/enterpass'
+    env.mongodb_uri = ''
     
 }
 

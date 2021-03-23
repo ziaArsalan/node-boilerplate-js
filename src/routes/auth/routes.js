@@ -4,7 +4,7 @@ const router = express.Router()
 const { ReqMethods } = require('../../enums/enums')
 
 const { SignUpCtrl, LoginCtrl } = require('./controllers')
-
+const { ApiErrorHandler } = require('../../utils/handler')
 
 
 const Route = () => {
@@ -12,12 +12,12 @@ const Route = () => {
         {
             method  : ReqMethods.POST,
             url     : '/signup',
-            fn      : SignUpCtrl
+            fn      : ApiErrorHandler(SignUpCtrl)
         },
         {
             method  : ReqMethods.POST,
             url     : '/login',
-            fn      : LoginCtrl
+            fn      : ApiErrorHandler(LoginCtrl)
         }
     ]
 

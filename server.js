@@ -2,9 +2,9 @@ const express = require('express')
 const compression = require('compression')
 const cors = require('cors')
 
-const env = require('./config/config')
-const connectDb = require('./database/db')
-const endpoints = require('./app')
+const env = require('./src/config/config')
+const connectDb = require('./src/database/db')
+const endpoints = require('./src/routes')
 
 const app = express()
 
