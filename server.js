@@ -15,6 +15,8 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false, limit: '50mb'}))
 app.use(compression())
 app.use(cors(env.corsOption))
+app.use(express.static(path.join(__dirname, 'build')))
+app.set('view engine', 'ejs')
 
 // app.options('*', cors(env.corsOption))
 // app.use(function (req, res, next) {
@@ -30,6 +32,10 @@ app.listen(env.port, () => {
 })
 
 endpoints(app)
+
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
 
 process.on("unhandledRejection", (err) => {
     console.log("Unhandeled Rejection\n ", err);

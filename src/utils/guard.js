@@ -43,7 +43,22 @@ const generateToken = (payload, expires_in) => {
 }
 
 const decodeToken = (token) => {
-    return jwt.verify(token, Shields.PRIVATE_KEY)
+    return new Promise(resolve => {
+        const verifyCallback = (err, data) => {
+            if(err)
+            resolve({
+                success : false,
+                error   : err.message
+            })
+    
+            resolve({
+                success : true,
+                data    : data
+            })
+        }
+        
+        jwt.verify(token, Shields.PRIVATE_KEY, verifyCallback)
+    })
 }
 
 const verifyPass = (pass, passHash) => {
