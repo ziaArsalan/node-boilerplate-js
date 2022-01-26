@@ -1,5 +1,5 @@
 const { connect } = require('mongoose')
-const config = require('../config/config')
+const config = require('../_config/config')
 
 const connectDb = () => {
     const mongooseOptions = {

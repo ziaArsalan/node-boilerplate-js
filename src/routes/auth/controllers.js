@@ -1,10 +1,10 @@
-const { ResponseStatus, UserTypes }   = require("../../enums/enums")
-const { userVld }                     = require("../../validations")
+const { ResponseStatus, UserTypes }   = require("../../_enums/enums")
+const { userVld }                     = require("../../_validations")
 const { SignUpService, LoginService } = require('./services')
 const Responses                       = require('./responses')
-const { getUniqueId }                 = require("../../utils/utils")
-const { generatePassHash }            = require("../../utils/guard")
-const { ValidationrHandler }          = require('../../utils/handler')
+const { getUniqueId }                 = require("../../_utils/utils")
+const { generatePassHash }            = require("../../_utils/guard")
+const { ValidationrHandler }          = require('../../_utils/handler')
 
 const SignUpCtrl = async (req, res) => {
 

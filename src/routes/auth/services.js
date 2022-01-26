@@ -1,5 +1,6 @@
 const User = require('../../model/user')
-const { generateToken, verifyPass } = require('../../utils/guard')
+const { generateToken, verifyPass } = require('../../_utils/guard')
+const { ServiceHandler } = require('../../_utils/handler')
 const Responses = require('./responses')
 
 const SignUpService = async (user) => {
@@ -46,7 +47,27 @@ const LoginService = async (reqDate) => {
     }
 }
 
+const SignUpServiceV2 = async (req) => {
+    const result = await User.create(req.user)
+
+    if(!result)
+    throw {message: Responses.SignupResponse.ERROR}
+
+    const newUser = result.toJSON()
+
+    delete newUser.password
+    newUser.token = generateToken({ _id: newUser._id, email: newUser.email }, '1d')
+
+    return {
+        success : true,
+        message : Responses.SignupResponse.CREATED,
+        data    : newUser
+    }
+
+}
+
 module.exports = {
     SignUpService,
-    LoginService
+    LoginService,
+    SignUpServiceV2 : (req, res) => ServiceHandler(SignUpServiceV2, req, res),
 }

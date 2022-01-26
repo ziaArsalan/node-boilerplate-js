@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose')
-const { UserTypes } = require('../enums/enums')
+const { UserTypes } = require('../_enums/enums')
 
 const UserSchema = new Schema({
     fullname    :   { type: String, required: true, trim: true },

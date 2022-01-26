@@ -1,6 +1,6 @@
-const enums                                = require('../enums')
+const enums                                = require('../_enums')
 // const logging                              = require('./logging')
-const { ResponseStatus, ResponseMessages } = require('../enums')
+const { ResponseStatus, ResponseMessages } = require('../_enums')
 
 const ApiErrorHandler = (fn) => {
     return (req, res, next) => {
@@ -68,17 +68,14 @@ const ValidationrHandler = (schema, data, res) => {
  * @param {Object} res - The controller response param
  * 
  */
+
 const ServiceHandler = async (fn, data, res) => {
     const result = await fn(data)
 
     if(!result.success)
-    return {
-        response : () => res.status(enums.ResponseStatus.BAD_REQUEST).send(result)
-    }
+    return res.status(enums.ResponseStatus.BAD_REQUEST).send(result)
 
-    return {
-        response : () => res.status(enums.ResponseStatus.SUCCESS).send(result)
-    }
+    return res.status(enums.ResponseStatus.SUCCESS).send(result)
 }
 
 module.exports = {

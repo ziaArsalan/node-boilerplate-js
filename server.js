@@ -1,15 +1,16 @@
 const express = require('express')
 const compression = require('compression')
 const cors = require('cors')
+const path = require('path')
 
-const env = require('./src/config/config')
+const env = require('./src/_config/config')
 const connectDb = require('./src/database/db')
 const endpoints = require('./src/routes')
 
 const app = express()
 
 // Connect to Database
-connectDb()
+// connectDb()
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false, limit: '50mb'}))
